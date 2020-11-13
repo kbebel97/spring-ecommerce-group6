@@ -1,0 +1,10 @@
+com\jumplus\ecommerce\config\WebAppInitializer.class
+com\jumplus\ecommerce\model\Invoice.class
+com\jumplus\ecommerce\controller\UserController.class
+com\jumplus\ecommerce\dao\UserDAO.class
+com\jumplus\ecommerce\config\SpringMvcConfig.class
+com\jumplus\ecommerce\model\User.class
+com\jumplus\ecommerce\connection\ConnectionManager.class
+com\jumplus\ecommerce\model\User$ROLE.class
+com\jumplus\ecommerce\dao\UserDAOimp.class
+com\jumplus\ecommerce\model\Item.class
