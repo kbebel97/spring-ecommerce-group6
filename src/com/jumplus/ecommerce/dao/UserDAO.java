@@ -13,7 +13,7 @@ public interface UserDAO {
 		public User getUserByPassword(String password);
 		
 		public User getUserByEmail(String email);
-		public User getUserByRole(ROLE role);
+		public List<User> getUserByRole(ROLE role);
 		
 		public boolean addUser(User user);
 		

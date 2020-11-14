@@ -18,6 +18,9 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 	
+	
+	// Pages
+	
 	@RequestMapping(value = "/")
 	public ModelAndView Login(ModelAndView model) {
 //		User user = userDAO.getUserByEmail("N/A");
@@ -34,26 +37,30 @@ public class UserController {
 		return model;
 	}
 	
+	
+	@RequestMapping(value="/homePage", method = RequestMethod.GET)
+	public ModelAndView homePage(@ModelAttribute User user) {
+//		String username = request.getParameter("username");
+//		String password = request.getParameter("password");
+		User userByusername = userDAO.getUserByUsername(user.getUsername());
+		User userBypassword = userDAO.getUserByPassword(user.getPassword());
+		if(userByusername != null && userBypassword!= null) {
+			ModelAndView model = new ModelAndView();
+			model.addObject("user", userByusername );
+			model.setViewName("customerhome");
+			return model;}
+		else return new ModelAndView("redirect:/");
+	}
+	
+	//Methods and redirects
+	
 	@RequestMapping(value="/saveUser", method = RequestMethod.POST)
 	public ModelAndView saveUser(@ModelAttribute User user) {
 		userDAO.addUser(user);
 		return new ModelAndView("redirect:/");
 	}
 	
-	@RequestMapping(value="/homePage", method = RequestMethod.GET)
-	public ModelAndView homePage(HttpServletRequest request) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		User userByusername = userDAO.getUserByUsername(username);
-		User userBypassword = userDAO.getUserByPassword(password);
-		ModelAndView model = new ModelAndView();
-		model.addObject("user", userByusername );
-		model.setViewName("customerhome");
-		return model;
-		
-	}
-	
-	
+}
 	
 
-}
+

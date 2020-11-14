@@ -1,4 +1,4 @@
-package com.jumplus.ecommerce.dao;
+package com.jumplus.ecommerce.daoimp;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jumplus.ecommerce.connection.ConnectionManager;
+import com.jumplus.ecommerce.dao.UserDAO;
 import com.jumplus.ecommerce.model.Invoice;
 import com.jumplus.ecommerce.model.User;
 import com.jumplus.ecommerce.model.User.ROLE;
@@ -26,12 +27,13 @@ public class UserDAOimp implements UserDAO {
 				ResultSet rs = stmt.executeQuery("select * from users"); ){
 					
 					while(rs.next()) {
-						String username = rs.getString(1);
-						String name = rs.getString(2);
-						String password = rs.getString(3);
-						String email=rs.getNString(4);
-						ROLE role=User.ROLE.valueOf(rs.getString("role"));
-						User user = new User(username, name, password, email, role);
+						int id = rs.getInt(1);
+						String username = rs.getString(2);
+						String name = rs.getString(3);
+						String password = rs.getString(4);
+						String email=rs.getString(5);
+						ROLE role=User.ROLE.valueOf(rs.getString(6));
+						User user = new User(id, username, name, password, email, role);
 						users.add(user);
 					}
 					
@@ -54,14 +56,15 @@ public class UserDAOimp implements UserDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				String username1 = rs.getString(1);
-				String name = rs.getString(2);
-				String password = rs.getString(3);
-				String email=rs.getString(4);
-				ROLE role=User.ROLE.valueOf(rs.getString("role"));
+				int userId = rs.getInt(1);
+				String username1 = rs.getString(2);
+				String name = rs.getString(3);
+				String password = rs.getString(4);
+				String email=rs.getString(5);
+				ROLE role=User.ROLE.valueOf(rs.getString(6));
 				
 				
-				user = new User(username1, name, password, email, role);
+				user = new User(userId, username1, name, password, email, role);
 			}
 			
 			
@@ -85,12 +88,13 @@ public class UserDAOimp implements UserDAO {
 				ResultSet rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					String username = rs.getString(1);
-					String name = rs.getString(2);
-					String password1 = rs.getString(3);
-					String email=rs.getString(4);
-					ROLE role=User.ROLE.valueOf(rs.getString("role"));
-					user = new User(username, name, password1, email, role);
+					int userId = rs.getInt(1);
+					String username = rs.getString(2);
+					String name = rs.getString(3);
+					String password1 = rs.getString(4);
+					String email=rs.getString(5);
+					ROLE role=User.ROLE.valueOf(rs.getString(6));
+					user = new User(userId, username, name, password1, email, role);
 				}
 				
 				
@@ -112,15 +116,13 @@ public class UserDAOimp implements UserDAO {
 				ResultSet rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					String username = rs.getString(1);
-					String name = rs.getString(2);
-					String password = rs.getString(3);
-					String email1=rs.getNString(4);
-					ROLE role=User.ROLE.valueOf(rs.getString("role"));
-					
-					
-					
-					user = new User(username, name, password, email1, role);
+					int userId = rs.getInt(1);
+					String username = rs.getString(2);
+					String name = rs.getString(3);
+					String password1 = rs.getString(4);
+					String email1 =rs.getString(5);
+					ROLE role=User.ROLE.valueOf(rs.getString(6));
+					user = new User(userId, username, name, password1, email1, role);
 				}
 				
 				
@@ -137,13 +139,13 @@ public class UserDAOimp implements UserDAO {
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into users values(?,?,?,?,?)");
-			
-			pstmt.setString(1, user.getUsername());
-			pstmt.setString(2, user.getName());
-			pstmt.setString(3, user.getPassword());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getRole().name());			
+			PreparedStatement pstmt = conn.prepareStatement("insert into users values(?,?,?,?,?,?)");
+			pstmt.setInt(1, user.getUserId());
+			pstmt.setString(2, user.getUsername());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setString(5, user.getEmail());
+			pstmt.setString(6, user.getRole().name());			
 			
 			
 			int insert = pstmt.executeUpdate();
@@ -164,13 +166,14 @@ public class UserDAOimp implements UserDAO {
 	}
 	
 	public boolean updateUser(User user) {
-		try(PreparedStatement pstmt = conn.prepareStatement("UPDATE users SET username = ?, name = ?, password = ?, role = ? WHERE email = ?")){
-			
-			 pstmt.setString(1, user.getUsername());
-			 pstmt.setString(2, user.getName());
-			 pstmt.setString(3, user.getPassword());
-			 pstmt.setString(4, user.getRole().name());
-			 pstmt.setString(5,  user.getEmail());
+		try(PreparedStatement pstmt = conn.prepareStatement("UPDATE users SET userId = ?, username = ?, name = ?, password = ?, role = ? WHERE email = ?")){
+			 
+			 pstmt.setInt(1, user.getUserId());
+			 pstmt.setString(2, user.getUsername());
+			 pstmt.setString(3, user.getName());
+			 pstmt.setString(4, user.getPassword());
+			 pstmt.setString(5, user.getRole().name());
+			 pstmt.setString(6,  user.getEmail());
 
 			 pstmt.executeUpdate();
 			 
@@ -185,35 +188,35 @@ public class UserDAOimp implements UserDAO {
 	}
 
 	@Override
-	public User getUserByRole(ROLE role) {
+	public List<User> getUserByRole(ROLE role) {
 		// TODO Auto-generated method stub
-		User user = null;
+		List<User> users = new ArrayList<User>();
 		 
 		 try(PreparedStatement pstmt = conn.prepareStatement("select * from users where role = ?")) {
 				
-				pstmt.setString(1, user.getRole().name());
+				pstmt.setString(1, role.name());
 				
 				ResultSet rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
-					String username = rs.getString(1);
-					String name = rs.getString(2);
-					String password = rs.getString(3);
-					String email1=rs.getNString(4);
-					ROLE role1=User.ROLE.valueOf(rs.getString("role"));
-				
-					user = new User(username, name, password, email1, role1);
+				while(rs.next()) {
+					int userId = rs.getInt(1);
+					String username = rs.getString(2);
+					String name = rs.getString(3);
+					String password = rs.getString(4);
+					String email1=rs.getNString(5);
+					ROLE role1=User.ROLE.valueOf(rs.getString(6));
+					User user = new User(userId, username, name, password, email1, role1);
+					users.add(user);
 				}
+				return users;
 				
 				
 			} catch(SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
-		
-		return user;
+		return users;
 	}
+	
 	@Override
 	public boolean deleteUser(User user) {
 		try(PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM users WHERE email=?")){

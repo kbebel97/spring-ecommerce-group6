@@ -11,7 +11,7 @@
 
 <div>
 	<p>Customer Log In</p>
-	<form action="/userlogin" method="post"><!-- This is for customer login -->
+	<form action="homePage" method="get" modelAttribute="user"><!-- This is for customer login -->
 		<label for = "username">Username: </label>
 		<input type="text" name="username" required><br/>
 		<label for = "password">Password: </label>
@@ -22,7 +22,7 @@
 
 <div>
 	<p>Admin Log In</p>
-	<form action="/adminlogin" method="post"><!-- This is for admin login -->
+	<form action="adminlogin" method="post"><!-- This is for admin login -->
 		<label for = "username">Username: </label>
 		<input type="text" name="username" required><br/>
 		<label for = "password">Password: </label>

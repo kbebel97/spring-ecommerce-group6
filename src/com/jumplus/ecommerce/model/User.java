@@ -10,6 +10,7 @@ public class User {
 		USER,ADMIN
 	}
 	
+	private int userId; 
 	private String username;
 	private String name;
 	private String password;
@@ -17,12 +18,13 @@ public class User {
 	private ROLE role;
 	
 	public User() {
-		this("N/A", "N/A", "N/A", "N/A",ROLE.USER);
+		this(0, "N/A", "N/A", "N/A", "N/A", ROLE.USER);
 	}
 	
 	
-	public User(String username, String name, String password, String email, ROLE role) {
+	public User(int userId, String username, String name, String password, String email, ROLE role) {
 		super();
+		this.userId = userId;
 		this.username = username;
 		this.name = name;
 		this.password = password;
@@ -31,7 +33,15 @@ public class User {
 	}
 
 
-	
+	public int getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 
 	public String getUsername() {
 		return username;
@@ -82,11 +92,17 @@ public class User {
 		this.role = role;
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", name=" + name + ", password=" + password + ", email=" + email
-				+ ", role=" + role + "]";
+		return "User [userId=" + userId + ", username=" + username + ", name=" + name + ", password=" + password
+				+ ", email=" + email + ", role=" + role + "]";
 	}
+
+	
+	
+
+	
 	
 	
 	

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.jumplus.ecommerce.daoimp.UserDAOimp;
 import com.jumplus.ecommerce.model.User;
 
 class UserDAOTest {

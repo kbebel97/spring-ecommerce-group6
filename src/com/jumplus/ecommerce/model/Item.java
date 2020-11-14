@@ -1,23 +1,30 @@
 package com.jumplus.ecommerce.model;
 
-
 public class Item {
 
+	private int itemId;
 	private String name;
 	private String code;
 	private double price;
-	private int quantity;
 	
 	public Item() {
-		this("N/A","N/A",0.00,20);
+		this(0, "N/A", "N/A", 0.00);
 	}
 
-	public Item(String name, String code, double price, int quantity) {
+	public Item(int itemId, String name, String code, double price) {
 		super();
+		this.itemId = itemId;
 		this.name = name;
 		this.code = code;
 		this.price = price;
-		this.quantity = quantity;
+	}
+
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getName() {
@@ -44,17 +51,11 @@ public class Item {
 		this.price = price;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	@Override
 	public String toString() {
-		return "Item [name=" + name + ", code=" + code + ", price=" + price + ", quantity=" + quantity + "]";
+		return "Item [itemId=" + itemId + ", name=" + name + ", code=" + code + ", price=" + price + "]";
 	}
+
 	
+
 }

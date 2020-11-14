@@ -10,8 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import com.jumplus.ecommerce.dao.ItemDAO;
 import com.jumplus.ecommerce.dao.UserDAO;
-import com.jumplus.ecommerce.dao.UserDAOimp;
+import com.jumplus.ecommerce.daoimp.ItemDAOimp;
+import com.jumplus.ecommerce.daoimp.UserDAOimp;
 
 @Configuration
 @EnableWebMvc
@@ -32,6 +34,11 @@ public class SpringMvcConfig implements WebMvcConfigurer{
 	@Bean
 	public UserDAO getUserDAO() {
 		return new UserDAOimp();
+	}
+	
+	@Bean
+	public ItemDAO getItemDAO() {
+		return new ItemDAOimp();
 	}
 
 }
