@@ -10,9 +10,9 @@ public interface UserDAO {
 		
 		public User getUserByUsername(String username);
 		
-		public User getUserByPassword(String password);
+		public User getUserById(int userId);
 		
-		public User getUserByEmail(String email);
+		public User getUserByPasswordandEmail(String password, String email);
 		public List<User> getUserByRole(ROLE role);
 		
 		public boolean addUser(User user);

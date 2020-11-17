@@ -44,6 +44,31 @@ public class UserDAOimp implements UserDAO {
 				return users;
 			
 			}
+	
+	public User getUserById(int userId) {
+		User user = null;
+		try(PreparedStatement pstmt = conn.prepareStatement("select * from users where userId = ?")) {
+			pstmt.setInt(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int userId1 = rs.getInt(1);
+				String username1 = rs.getString(2);
+				String name = rs.getString(3);
+				String password = rs.getString(4);
+				String email=rs.getString(5);
+				ROLE role=User.ROLE.valueOf(rs.getString(6));
+				
+				
+				user = new User(userId1, username1, name, password, email, role);
+			}
+			
+
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 
 	public User getUserByUsername(String username) {
 		// TODO Auto-generated method stub
@@ -78,12 +103,13 @@ public class UserDAOimp implements UserDAO {
 	}
 		
 
-	public User getUserByPassword(String password) {
+	public User getUserByPasswordandEmail(String password, String email) {
 		  User user = null;
 			
-			try(PreparedStatement pstmt = conn.prepareStatement("select * from users where password = ?")) {
+			try(PreparedStatement pstmt = conn.prepareStatement("select * from users where password = ? and email = ?")) {
 				
 				pstmt.setString(1, password);
+				pstmt.setString(2, email);
 				
 				ResultSet rs = pstmt.executeQuery();
 				
@@ -92,35 +118,7 @@ public class UserDAOimp implements UserDAO {
 					String username = rs.getString(2);
 					String name = rs.getString(3);
 					String password1 = rs.getString(4);
-					String email=rs.getString(5);
-					ROLE role=User.ROLE.valueOf(rs.getString(6));
-					user = new User(userId, username, name, password1, email, role);
-				}
-				
-				
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
-			
-			return user;
-			}
-
-	public User getUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		 User user = null;
-		 
-		 try(PreparedStatement pstmt = conn.prepareStatement("select * from users where email = ?")) {
-				
-				pstmt.setString(1, email);
-				
-				ResultSet rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-					int userId = rs.getInt(1);
-					String username = rs.getString(2);
-					String name = rs.getString(3);
-					String password1 = rs.getString(4);
-					String email1 =rs.getString(5);
+					String email1=rs.getString(5);
 					ROLE role=User.ROLE.valueOf(rs.getString(6));
 					user = new User(userId, username, name, password1, email1, role);
 				}
@@ -130,11 +128,9 @@ public class UserDAOimp implements UserDAO {
 				e.printStackTrace();
 			}
 			
-			
-		
-		return user;
-		
+			return user;
 	}
+
 
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
@@ -233,5 +229,6 @@ public class UserDAOimp implements UserDAO {
 		return false;
 		
 	}
+
 
 }

@@ -10,6 +10,8 @@ public class User {
 		USER,ADMIN
 	}
 	
+	public static int staticuserId = 0;
+	
 	private int userId; 
 	private String username;
 	private String name;
@@ -24,7 +26,7 @@ public class User {
 	
 	public User(int userId, String username, String name, String password, String email, ROLE role) {
 		super();
-		this.userId = userId;
+		this.userId = User.staticuserId ++;
 		this.username = username;
 		this.name = name;
 		this.password = password;

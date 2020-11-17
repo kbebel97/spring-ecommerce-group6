@@ -16,4 +16,6 @@ public interface cartItemDAO {
 	
 	public boolean updatecartItemQuantity(cartItem cartItem);
 
+	public cartItem getcartItem(int userId, int cartitemId);
+
 }

@@ -23,7 +23,7 @@ public class cartItemDAOimp implements cartItemDAO {
         List<cartItem> cartItems = new ArrayList<cartItem>();
 		
 		try(Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from cartinventory"); ){
+		ResultSet rs = stmt.executeQuery("select * from cartitems"); ){
 			
 			while(rs.next()) {
 				int id = rs.getInt(1);
@@ -53,7 +53,7 @@ public class cartItemDAOimp implements cartItemDAO {
 		// TODO Auto-generated method stub
 		 List<cartItem> cartItems = new ArrayList<cartItem>();
 			
-			try(PreparedStatement pstmt = conn.prepareStatement("select * from cartinventory where userId = ?")) {
+			try(PreparedStatement pstmt = conn.prepareStatement("select * from cartitems where userId = ?")) {
 				
 				pstmt.setInt(1, userId);
 				
@@ -79,13 +79,45 @@ public class cartItemDAOimp implements cartItemDAO {
 			
 			return cartItems;
 	}
+	
+	@Override
+	public cartItem getcartItem(int userId, int cartitemId) {
+		// TODO Auto-generated method stub
+		 cartItem cartItem = null;
+			
+			try(PreparedStatement pstmt = conn.prepareStatement("select * from cartitems where userId = ? and cartitemId = ?")) {
+				
+				pstmt.setInt(1, userId);
+				pstmt.setInt(2, cartitemId);
+				ResultSet rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					String code = rs.getString(3);
+					Double price = rs.getDouble(4);
+					int userId1 = rs.getInt(5);
+					int quantity = rs.getInt(6);
+					
+					
+					cartItem = new cartItem(id, name, code, price, userId1, quantity);
+				}
+				
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			return cartItem;
+	}
 
 
 	@Override
 	public boolean addcartItem(cartItem cartItem) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into cartinventory values(?,?,?,?,?,?)");
+			PreparedStatement pstmt = conn.prepareStatement("insert into cartitems values(?,?,?,?,?,?)");
 			pstmt.setInt(1, cartItem.getItemId());
 			pstmt.setString(2, cartItem.getName());
 			pstmt.setString(3, cartItem.getCode());
@@ -113,7 +145,7 @@ public class cartItemDAOimp implements cartItemDAO {
 	@Override
 	public boolean deletecartItem(int itemId, int userId) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("delete * from cartinventory where itemId = ? and userId = ?");
+			PreparedStatement pstmt = conn.prepareStatement("delete * from cartitems where itemId = ? and userId = ?");
 			pstmt.setInt(1, itemId);
 			pstmt.setInt(2, userId);
 			int delete = pstmt.executeUpdate();
@@ -131,7 +163,7 @@ public class cartItemDAOimp implements cartItemDAO {
 	
 	@Override
 	public boolean updatecartItemQuantity(cartItem cartItem) {
-		try(PreparedStatement pstmt = conn.prepareStatement("UPDATE cartinventory SET quantity = ? WHERE itemId = ?")){
+		try(PreparedStatement pstmt = conn.prepareStatement("UPDATE cartitems SET quantity = ? WHERE itemId = ?")){
 			
 			 pstmt.setInt(1, cartItem.getQuantity());
 			 pstmt.setInt(2, cartItem.getItemId());
