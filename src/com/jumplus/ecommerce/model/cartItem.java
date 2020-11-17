@@ -7,10 +7,10 @@ public class cartItem extends Item {
 	private int quantity;
 	
 	public cartItem() {
-		this(0, "N/A","N/A",0.00, 0, 0);
+		this(0, "N/A","N/A","N/A", 0, 0);
 	}
 
-	public cartItem(int itemId, String name, String code, double price, int userId, int quantity){
+	public cartItem(int itemId, String name, String code, String price, int userId, int quantity){
 		super(itemId, name, code, price);
 		this.userId = userId;
 		this.quantity = quantity;

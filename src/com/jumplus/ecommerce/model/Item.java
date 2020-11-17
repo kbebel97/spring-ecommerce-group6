@@ -5,13 +5,13 @@ public class Item {
 	private int itemId;
 	private String name;
 	private String code;
-	private double price;
+	private String price;
 	
 	public Item() {
-		this(0, "N/A", "N/A", 0.00);
+		this(0, "N/A", "N/A", "N/A");
 	}
 
-	public Item(int itemId, String name, String code, double price) {
+	public Item(int itemId, String name, String code, String price) {
 		super();
 		this.itemId = itemId;
 		this.name = name;
@@ -43,11 +43,11 @@ public class Item {
 		this.code = code;
 	}
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 

@@ -26,7 +26,7 @@ public class User {
 	
 	public User(int userId, String username, String name, String password, String email, ROLE role) {
 		super();
-		this.userId = User.staticuserId ++;
+		this.userId = userId;
 		this.username = username;
 		this.name = name;
 		this.password = password;

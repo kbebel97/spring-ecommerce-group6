@@ -7,10 +7,10 @@ public class purchasedItem extends cartItem {
 
 	
 	public purchasedItem(){
-		this(0, "N/A", "N/A", 0.0, 0, "N/A", 0);
+		this(0, "N/A", "N/A","N/A", 0, "N/A", 0);
 	}
 
-	public purchasedItem(int itemId, String name, String code, double price, int userId, String purchaseDate, int quantity){
+	public purchasedItem(int itemId, String name, String code, String price, int userId, String purchaseDate, int quantity){
 		super(itemId,name,code, price, userId, quantity);
 		this.purchaseDate = purchaseDate;
 	}

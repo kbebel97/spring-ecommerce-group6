@@ -28,7 +28,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 				int id = rs.getInt(1);
 				String name = rs.getString(2);
 				String code = rs.getString(3);
-				Double price = rs.getDouble(4);
+				String price = rs.getString(4);
 				int userId = rs.getInt(5);
 				String purchaseDate = rs.getString(6);
 				int quantity = rs.getInt(7);
@@ -62,7 +62,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
 					String code = rs.getString(3);
-					Double price = rs.getDouble(4);
+					String price = rs.getString(4);
 					int userId1 = rs.getInt(5);
 					String purchaseDate = rs.getString(6);
 					int quantity = rs.getInt(7);
@@ -90,7 +90,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 			pstmt.setInt(1, purchasedItem.getItemId());
 			pstmt.setString(2, purchasedItem.getName());
 			pstmt.setString(3, purchasedItem.getCode());
-			pstmt.setDouble(4, purchasedItem.getPrice());
+			pstmt.setString(4, purchasedItem.getPrice());
 			pstmt.setInt(5, purchasedItem.getUserId());
 			pstmt.setString(6, purchasedItem.getPurchaseDate());
 			pstmt.setInt(7,  purchasedItem.getQuantity());
