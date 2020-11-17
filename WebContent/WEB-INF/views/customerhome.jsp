@@ -17,27 +17,29 @@
   transition:0.3s;
 }
 </style>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 </head>
 <body>
-	<h1></h1>
-	<div class="tables">
-		<div> Hello
-		</div>
-		<div> Hello
-		</div>
-	</div>
-	
-display all products here, make each item div clickable so you can get linked to that item's page <br/>
-when you get to the item page, then you can add to cart<br/>
 <a href="shoppingcart.jsp">Your Shopping Cart</a><br/>
 
-<div class="productDiv">
-	<div style="width:40%; float:left;margin-right:10px">
-		<img src = "https://raymourflanigan.scene7.com/is/image/RaymourandFlanigan/FW_LANE_200297706_3000?wid=1600&fit=fit%2C1" style="width:100%">
-	</div>
-	<h1>Ollie Chenille Sofa</h1>
-	<h2>$765</h2>
-	<button>Add to cart</button><!-- might end up making this form with just a submit button -->
-</div>
+
+
+	<c:forEach var="item" items="${items}">
+		<div class="productDiv">
+			<div style="width:40%; float:left;margin-right:10px">
+				<img src = ${item.code} style="width:100%">
+			</div>
+			<h1>${item.name}</h1>
+			<h2>${item.price}</h2>
+			<form action="addtoCart" method="get">
+				<input type="hidden" name="itemId" value=${item.itemId }>
+				<input type="hidden" name="userId" value=${user.userId }>
+				<button type="submit">Add to cart</button>			
+			</form>
+		</div>
+	</c:forEach>
+
+
+
 </body>
 </html>

@@ -57,15 +57,12 @@ public class UserController {
 	
 	@RequestMapping(value="/shoppingcart", method = RequestMethod.GET)
 	public ModelAndView homePage(@ModelAttribute User user) {
-		System.out.println(user);
-
+		System.out.println("your input: " + user);
 		User userBypasswordAndemail = userDAO.getUserByPasswordandEmail(user.getPassword(), user.getEmail());
 		if(userBypasswordAndemail != null) {
-			System.out.println(userBypasswordAndemail);
+			System.out.println("From the userDAO:" + userBypasswordAndemail);
 			List<cartItem> cartItems = cartItemDAO.getcartItems(userBypasswordAndemail.getUserId());
-			System.out.println(cartItems);
 			List<Item> Items = itemDAO.getAllItems();
-			System.out.println(Items);			
 			ModelAndView model = new ModelAndView();
 			model.addObject("user", userBypasswordAndemail);
 			model.addObject("cartItems", cartItems);
@@ -102,8 +99,10 @@ public class UserController {
 		return new ModelAndView("redirect:/");
 	}
 	
-	@RequestMapping(value="/addtoCart", method = RequestMethod.POST)
-	public void addtoCart(HttpServletRequest request) {
+	@RequestMapping(value="/addtoCart", method = RequestMethod.GET)
+	public ModelAndView addtoCart(HttpServletRequest request) {
+//		System.out.println("item Id: " + request.getParameter("itemId"));
+//		System.out.println("user ID: " + request.getParameter("userId"));
 		Item item = itemDAO.getItem(Integer.parseInt(request.getParameter("itemId")));
 		cartItem ci = new cartItem();
 		ci.setItemId(item.getItemId());
@@ -113,6 +112,13 @@ public class UserController {
 		ci.setQuantity(1);
 		ci.setUserId(Integer.parseInt(request.getParameter("userId")));
 		cartItemDAO.addcartItem(ci);
+		List<Item> items = itemDAO.getAllItems();
+		ModelAndView model = new ModelAndView();
+		User user = userDAO.getUserById(Integer.parseInt(request.getParameter("userId")));
+		model.addObject("user", user);
+		model.addObject("items", items);
+		model.setViewName("customerhome");
+		return model;
 	}
 	
 	@RequestMapping(value="/deletefromCart", method = RequestMethod.DELETE)
@@ -140,14 +146,8 @@ public class UserController {
 	@RequestMapping(value="/makeReturn", method = RequestMethod.DELETE)
 	public ModelAndView makeReturn(HttpServletRequest request) {
 		purchasedItemDAO.deletepurchasedItem(Integer.parseInt(request.getParameter("purchaseditemId")), Integer.parseInt(request.getParameter("userId")));
-		return new ModelAndView("redirect:/purchasedProducts");
-		
+		return new ModelAndView("redirect:/purchasedProducts");	
 	}
-	
-	
-	
-	
-	
 }
 	
 

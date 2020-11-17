@@ -21,13 +21,13 @@ public class ItemDAOimp implements ItemDAO {
         List<Item> items = new ArrayList<Item>();
 		
 		try(Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from inventory"); ){
+		ResultSet rs = stmt.executeQuery("select * from items"); ){
 			
 			while(rs.next()) {
 				int id = rs.getInt(1);
 				String name = rs.getString(2);
 				String code = rs.getString(3);
-				Double price = rs.getDouble(4);
+				String price = rs.getString(4);
 			
 				Item item = new Item(id, name,code,price);
 				items.add(item);
@@ -47,7 +47,7 @@ public class ItemDAOimp implements ItemDAO {
 		// TODO Auto-generated method stub
 		 Item item = null;
 			
-			try(PreparedStatement pstmt = conn.prepareStatement("select * from inventory where itemId = ?")) {
+			try(PreparedStatement pstmt = conn.prepareStatement("select * from items where itemId = ?")) {
 				
 				pstmt.setInt(1, itemId);
 				
@@ -57,7 +57,7 @@ public class ItemDAOimp implements ItemDAO {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
 					String code1 = rs.getString(3);
-					Double price = rs.getDouble(4);
+					String price = rs.getString(4);
 					
 					
 					item = new Item(id, name, code1, price);
@@ -77,11 +77,11 @@ public class ItemDAOimp implements ItemDAO {
 	public boolean addItem(Item item) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into inventory values(?,?,?,?)");
+			PreparedStatement pstmt = conn.prepareStatement("insert into items values(?,?,?,?)");
 			pstmt.setInt(1, item.getItemId());
 			pstmt.setString(2, item.getName());
 			pstmt.setString(3, item.getCode());
-			pstmt.setDouble(4, item.getPrice());
+			pstmt.setString(4, item.getPrice());
 			
 			
 			int insert = pstmt.executeUpdate();

@@ -12,8 +12,8 @@
 <div>
 	<p>Customer Log In</p>
 	<form action="shoppingcart" method="get" modelAttribute="user"><!-- This is for customer login -->
-		<label for = "username">Username: </label>
-		<input type="text" name="username" required><br/>
+		<label for = "email">Email: </label>
+		<input type="text" name="email" required><br/>
 		<label for = "password">Password: </label>
 		<input type="password" name="password" required><br/>
 		<button type="submit">Log In</button>

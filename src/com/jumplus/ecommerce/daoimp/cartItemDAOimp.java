@@ -29,7 +29,7 @@ public class cartItemDAOimp implements cartItemDAO {
 				int id = rs.getInt(1);
 				String name = rs.getString(2);
 				String code = rs.getString(3);
-				Double price = rs.getDouble(4);
+				String price = rs.getString(4);
 				int userId = rs.getInt(5);
 				int quantity = rs.getInt(6);
 				
@@ -63,7 +63,7 @@ public class cartItemDAOimp implements cartItemDAO {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
 					String code = rs.getString(3);
-					Double price = rs.getDouble(4);
+					String price = rs.getString(4);
 					int userId1 = rs.getInt(5);
 					int quantity = rs.getInt(6);
 					
@@ -95,7 +95,7 @@ public class cartItemDAOimp implements cartItemDAO {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
 					String code = rs.getString(3);
-					Double price = rs.getDouble(4);
+					String price = rs.getString(4);
 					int userId1 = rs.getInt(5);
 					int quantity = rs.getInt(6);
 					
@@ -121,7 +121,7 @@ public class cartItemDAOimp implements cartItemDAO {
 			pstmt.setInt(1, cartItem.getItemId());
 			pstmt.setString(2, cartItem.getName());
 			pstmt.setString(3, cartItem.getCode());
-			pstmt.setDouble(4, cartItem.getPrice());
+			pstmt.setString(4, cartItem.getPrice());
 			pstmt.setInt(5, cartItem.getUserId());
 			pstmt.setInt(6, cartItem.getQuantity());
 			
