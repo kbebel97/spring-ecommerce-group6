@@ -1,0 +1,7 @@
+@charset "ISO-8859-1";
+
+.tables{
+	display: flex;
+	flex-direction: row;
+	background: black;
+}

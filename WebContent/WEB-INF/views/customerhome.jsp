@@ -19,7 +19,14 @@
 </style>
 </head>
 <body>
-<h1>Customer Home</h1>
+	<h1></h1>
+	<div class="tables">
+		<div> Hello
+		</div>
+		<div> Hello
+		</div>
+	</div>
+	
 display all products here, make each item div clickable so you can get linked to that item's page <br/>
 when you get to the item page, then you can add to cart<br/>
 <a href="shoppingcart.jsp">Your Shopping Cart</a><br/>

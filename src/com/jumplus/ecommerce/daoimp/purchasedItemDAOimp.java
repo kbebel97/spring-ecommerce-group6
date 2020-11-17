@@ -22,7 +22,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
         List<purchasedItem> purchasedItems = new ArrayList<purchasedItem>();
 		
 		try(Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from inventory"); ){
+		ResultSet rs = stmt.executeQuery("select * from purchaseditems"); ){
 			
 			while(rs.next()) {
 				int id = rs.getInt(1);
@@ -52,7 +52,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 		// TODO Auto-generated method stub
 		List<purchasedItem> purchasedItems = new ArrayList<purchasedItem>();
 			
-			try(PreparedStatement pstmt = conn.prepareStatement("select * from inventory where userId = ?")) {
+			try(PreparedStatement pstmt = conn.prepareStatement("select * from purchaseditems where userId = ?")) {
 				
 				pstmt.setInt(1, userId);
 				
@@ -86,7 +86,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 	public boolean addpurchasedItem(purchasedItem purchasedItem) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("insert into inventory values(?,?,?,?)");
+			PreparedStatement pstmt = conn.prepareStatement("insert into purchaseditems values(?,?,?,?)");
 			pstmt.setInt(1, purchasedItem.getItemId());
 			pstmt.setString(2, purchasedItem.getName());
 			pstmt.setString(3, purchasedItem.getCode());
@@ -115,7 +115,7 @@ public class purchasedItemDAOimp implements purchasedItemDAO{
 	
 	public boolean deletepurchasedItem(int itemId, int userId) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("delete * from cartinventory where itemId = ? and userId = ?");
+			PreparedStatement pstmt = conn.prepareStatement("delete * from purchaseditems where itemId = ? and userId = ?");
 			pstmt.setInt(1, itemId);
 			pstmt.setInt(2, userId);
 			int delete = pstmt.executeUpdate();

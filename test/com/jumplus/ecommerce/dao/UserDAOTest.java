@@ -32,21 +32,13 @@ class UserDAOTest {
 		
 		assertTrue(result);		
 	}
-	
-	@Test
-	void testGetUserByEmail() {
-		dao = new UserDAOimp();
-		
-		User user = dao.getUserByEmail("N/A");
-		assertNotNull(user);		
-	}
 
 
 	@Test
-	void testgetUserByPassword() {
+	void testgetUserByPasswordandEmail() {
 		dao = new UserDAOimp();
 		
-		User user = dao.getUserByPassword("N/A");
+		User user = dao.getUserByPasswordandEmail("N/A", "N/A");
 		assertNotNull(user);
 	}
 
@@ -58,9 +50,6 @@ class UserDAOTest {
 		assertTrue(result);
 	}
 
-	@Test
-	void testList() {
-		fail("Not yet implemented");
-	}
+
 
 }

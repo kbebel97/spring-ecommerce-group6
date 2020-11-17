@@ -14,6 +14,10 @@ import com.jumplus.ecommerce.dao.ItemDAO;
 import com.jumplus.ecommerce.dao.UserDAO;
 import com.jumplus.ecommerce.daoimp.ItemDAOimp;
 import com.jumplus.ecommerce.daoimp.UserDAOimp;
+import com.jumplus.ecommerce.daoimp.cartItemDAOimp;
+import com.jumplus.ecommerce.daoimp.purchasedItemDAOimp;
+import com.jumplus.ecommerce.dao.cartItemDAO;
+import com.jumplus.ecommerce.dao.purchasedItemDAO;
 
 @Configuration
 @EnableWebMvc
@@ -39,6 +43,16 @@ public class SpringMvcConfig implements WebMvcConfigurer{
 	@Bean
 	public ItemDAO getItemDAO() {
 		return new ItemDAOimp();
+	}
+	
+	@Bean 
+	public cartItemDAO cartItemDAO() {
+		return new cartItemDAOimp();
+	}
+	
+	@Bean
+	public purchasedItemDAO purchasedItemDAO() {
+		return new purchasedItemDAOimp();
 	}
 
 }
