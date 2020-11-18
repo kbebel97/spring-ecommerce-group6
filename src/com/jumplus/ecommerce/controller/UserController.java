@@ -43,8 +43,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/")
 	public ModelAndView Login(ModelAndView model) {
-		model.setViewName("login");
-		return new ModelAndView("login");
+		model.setViewName("index");
+		return new ModelAndView("index");
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -55,12 +55,10 @@ public class UserController {
 		return new ModelAndView("register");
 	}
 	
-	@RequestMapping(value="/shoppingcart", method = RequestMethod.GET)
+	@RequestMapping(value="/usercatalog", method = RequestMethod.GET)
 	public ModelAndView homePage(@ModelAttribute User user) {
-		System.out.println("your input: " + user);
 		User userBypasswordAndemail = userDAO.getUserByPasswordandEmail(user.getPassword(), user.getEmail());
 		if(userBypasswordAndemail != null) {
-			System.out.println("From the userDAO:" + userBypasswordAndemail);
 			List<cartItem> cartItems = cartItemDAO.getcartItems(userBypasswordAndemail.getUserId());
 			List<Item> Items = itemDAO.getAllItems();
 			ModelAndView model = new ModelAndView();
@@ -79,6 +77,7 @@ public class UserController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("cartItems", cartItems);
 		model.addObject("user", user);
+		model.setViewName("shoppingcart");
 		return model;	
 	}
 	
@@ -90,7 +89,21 @@ public class UserController {
 		return model;
 	}
 	
+	@RequestMapping(value="/customerdetails", method = RequestMethod.GET)
+	public ModelAndView customerdetails(HttpServletRequest request) {
+		User user = userDAO.getUserById(Integer.parseInt(request.getParameter("userId")));
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.setViewName("customerdetails");
+		return model;
+	}
 	
+	@RequestMapping(value="/confirmorder", method = RequestMethod.POST)
+	public ModelAndView confirmOrder(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("invoice");
+		return model;
+	}
 //--------------------------------------- Methods and Redirects ---------------------------------------//
 	
 	@RequestMapping(value="/saveUser", method = RequestMethod.POST)
@@ -147,6 +160,11 @@ public class UserController {
 	public ModelAndView makeReturn(HttpServletRequest request) {
 		purchasedItemDAO.deletepurchasedItem(Integer.parseInt(request.getParameter("purchaseditemId")), Integer.parseInt(request.getParameter("userId")));
 		return new ModelAndView("redirect:/purchasedProducts");	
+	}
+	
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpServletRequest request) {
+		return new ModelAndView("redirect:/");	
 	}
 }
 	

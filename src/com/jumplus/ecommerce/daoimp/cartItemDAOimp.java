@@ -66,9 +66,9 @@ public class cartItemDAOimp implements cartItemDAO {
 					String price = rs.getString(4);
 					int userId1 = rs.getInt(5);
 					int quantity = rs.getInt(6);
-					
-					
-					cartItems.add(new cartItem(id, name, code, price, userId1, quantity));
+					cartItem cartitem = new cartItem(id, name,code,price, userId, quantity);
+					cartItems.add(cartitem);
+
 				}
 				
 				

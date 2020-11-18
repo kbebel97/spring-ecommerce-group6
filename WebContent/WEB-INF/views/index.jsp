@@ -13,11 +13,20 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  
+<style>
+.content{
+	margin-left:20%;
+	width:60%;
+	margin-right:20%;
+	padding:10px;
+    border: 1px solid rgb(217,217,217);
+    background-color:rgb(248, 249, 251);
+}
+</style>
    
 </head>
-
-
+<body>
+<div class="content">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="index.jsp">Furniture Store</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,16 +49,16 @@
     
   </div>
 </nav>
-<body>
+
 <h1>Login</h1>
+<hr>
 
-
-	<p>Customer Log In</p>
-	<form action="homePage" method="get"  modelAttribute="user"><!-- This is for customer login -->
+	<h4>Customer Log In</h4>
+	<form action="usercatalog" method="get"  modelAttribute="user"><!-- This is for customer login -->
 	
 	 <div class="form-group">
-		<label for = "username">Username: </label>
-		<input type="text" class="form-control" name="username" autocomplete="off" required>
+		<label for = "email">Email: </label>
+		<input type="text" class="form-control" name="email" autocomplete="off" required>
 		</div>
 		<div class="form-group">
 		<label for = "password">Password: </label>
@@ -60,11 +69,11 @@
 <br/>
 
 
-	<p>Admin Log In</p>
+	<h4>Admin Log In</h4>
 	<form action="adminlogin" method="post"><!-- This is for admin login -->
 	<div class="form-group">
-		<label for = "username">Username: </label>
-		<input type="text" class="form-control" name="username" autocomplete="off" required>
+		<label for = "email">Email: </label>
+		<input type="text" class="form-control" name="email" autocomplete="off" required>
 		</div>
 		<div class="form-group">
 		<label for = "password">Password: </label>
@@ -75,7 +84,7 @@
 	<br/>
 
 <a href ="register">Don't have an Account? Register now</a><br/>
-
+</div>
 
 
 

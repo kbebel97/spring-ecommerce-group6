@@ -44,19 +44,55 @@ h5 {
 .text-dark {
     color: #3d405c !important
 }
-  
+  .content{
+	margin-left:20%;
+	width:60%;
+	padding:10px;
+    border: 1px solid rgb(217,217,217);
+    background-color:rgb(248, 249, 251);
+}
   </style>
   
 </head>
 <body>
+<div class="content">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.jsp">Furniture Store</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="customerhome.jsp">Welcome ${user.username } <span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="shoppingcart.jsp">Cart</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">About us</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="#">Contact us</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="logout">Logout</a>
+      </li>
+     
+         
+    </ul>
+    
+  </div>
+</nav>
 <div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<h1 class="display-4">Thank you for your business!</h1>
 				<p class="lead">Your order is being processed and will be shipped in 7-14 business days.</p>
 			</div>
-			</div>
-			
+</div>
+</div>
+	<!-- 		
  <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
      <div class="card">
          <div class="card-header p-4">
@@ -144,5 +180,6 @@ h5 {
         
      </div>
  </div>
+  -->
 </body>
 </html>

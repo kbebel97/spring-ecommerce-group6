@@ -3,6 +3,10 @@ package com.jumplus.ecommerce.model;
 
 public class cartItem extends Item {
 
+	private int itemId;
+	private String name;
+	private String code;
+	private String price;
 	private int userId;
 	private int quantity;
 	
@@ -12,8 +16,13 @@ public class cartItem extends Item {
 
 	public cartItem(int itemId, String name, String code, String price, int userId, int quantity){
 		super(itemId, name, code, price);
+		this.itemId = itemId;
+		this.name = name;
 		this.userId = userId;
 		this.quantity = quantity;
+		this.name = name;
+		this.code = code;
+		this.price = price;
 		
 	}
 
@@ -35,7 +44,7 @@ public class cartItem extends Item {
 
 	@Override
 	public String toString() {
-		return "cartItem [userId=" + userId + ", quantity=" + quantity + "]";
+		return "cartItem [itemId=" + itemId + ", userId=" + userId + ", quantity=" + quantity + "]";
 	}
 
 	
